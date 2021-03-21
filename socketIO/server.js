@@ -3,7 +3,8 @@
 	socket.io : https://socket.io/docs/v3/index.html
 	https://socket.io/docs/v3/emit-cheatsheet/
 */
-const version = "RUSTEN Chat Service";
+const version = "version: 0.0.1";
+
 const express = require("express");
 const app = express();
 
@@ -20,7 +21,7 @@ const io = socket(server);
 
 io.on("connection",(s) =>
 {
-	s.send({ raw: 'connect', msg: 'Connected to ' + version + '\r\nJoin channel to continue..' });
+	s.send({ raw: 'connect', msg: version });
 
 	s.on("room",(data) =>
 	{
@@ -31,9 +32,9 @@ io.on("connection",(s) =>
 			//s.leave(data.room);
 			s.join(trimRoom);
 
-			console.log(s.id + ' has joined room ' + trimRoom); //log
+			console.log(s.id + ' has joined room ' + trimRoom + ' (' + countUsers(trimRoom) + ')'); //log
 
-			io.to(data.room).emit("message",{ raw: 'join', id: s.id, msg: ' has joined ' + trimRoom, room: trimRoom });
+			io.to(data.room).emit("message",{ raw: 'join', id: s.id, msg: ' has joined ' + trimRoom + ' \r\nUsers: (' + countUsers(trimRoom) + ')', room: trimRoom });
 		}
 	});
 
@@ -47,9 +48,18 @@ io.on("connection",(s) =>
 		{
 			io.to(trimRoom).emit("message",{ raw: 'msg', id: trimId, msg: trimMsg, room: trimRoom });
 		}
-		else
-		{
-			s.send({ raw: 'error', msg: 'Error, (Message/Room)' });
-		}
 	});
 });
+
+function countUsers(getRoom)
+{
+	let test = io.sockets.adapter.rooms.get(getRoom);
+	let num = 0;
+
+	test.forEach((e) =>
+	{
+		num++;
+	});
+
+        return num;
+}
