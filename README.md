@@ -2,7 +2,7 @@
 - nodejs chat with rooms
 - express server
 - socket.io chat
-- FILES(index.html, app.js, design.css, server.js)
+- FILES(index.html, app.js, design.css, server.js, bg.png)
 
 # INSTALL
 - npm i express socket.io
