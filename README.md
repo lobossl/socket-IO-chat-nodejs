@@ -1,5 +1,8 @@
-# RUSTEN Chat Service
-- nodejs socket.io express chat with rooms
+# Simple RUSTEN Chat Service
+- nodejs chat with rooms
+- express server
+- socket.io chat
+- FILES(index.html, app.js, design.css, server.js)
 
 # INSTALL
 - npm i express socket.io
