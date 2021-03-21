@@ -1,11 +1,6 @@
+//app.js
 let connect = io.connect();
 
-/*connect.on("connect",() =>
-{
-	console.log(connect.connected);
-	start(connect);
-});
-*/
 function start(socket)
 {
 	const btnID = document.getElementById("btn");
@@ -16,6 +11,7 @@ function start(socket)
 	socket.on("disconnect",(e) =>
 	{
 		windowID.innerText = 'Disconnected.\r\nReconnecting..\r\n';
+
 		roomID.value = '';
 	});
 

@@ -1,9 +1,9 @@
 /*
-	chat
-	socket.io : https://socket.io/docs/v3/index.html
-	https://socket.io/docs/v3/emit-cheatsheet/
+	server.js
+
+	HELP: https://socket.io/docs/v3/emit-cheatsheet/
 */
-const version = "version: 0.0.1";
+const version = "server version: 1.0.0";
 
 const express = require("express");
 const app = express();
@@ -32,21 +32,30 @@ io.on("connection",(s) =>
 			//s.leave(data.room);
 			s.join(trimRoom);
 
-			console.log(s.id + ' has joined room ' + trimRoom + ' (' + countUsers(trimRoom) + ')'); //log
-
 			io.to(data.room).emit("message",{ raw: 'join', id: s.id, msg: ' has joined ' + trimRoom + ' \r\nUsers: (' + countUsers(trimRoom) + ')', room: trimRoom });
 		}
 	});
 
 	s.on("message",(data) =>
 	{
-		const trimMsg = data.msg.trim();
-		const trimRoom = data.room.trim();
-		const trimId = data.id.trim();
+                const trimMsg = data.msg.trim();
+                const trimRoom = data.room.trim();
+                const trimId = data.id.trim();
 
-		if((trimMsg.length > 0) && (trimRoom.length > 0) && (trimRoom.length <= 64))
+		if((trimMsg) && (trimRoom) && (trimId))
 		{
-			io.to(trimRoom).emit("message",{ raw: 'msg', id: trimId, msg: trimMsg, room: trimRoom });
+			if((trimMsg.length > 0) && (trimRoom.length > 0) && (trimRoom.length <= 64))
+			{
+				io.to(trimRoom).emit("message",{ raw: 'msg', id: trimId, msg: trimMsg, room: trimRoom });
+			}
+			else
+			{
+				io.to(trimRoom).emit("message",{ raw: 'error', msg: 'input error, please try again.' });
+			}
+		}
+		else
+		{
+			io.to(trimRoom).emit("message",{ raw: 'error', msg: 'NO MSG,ROOM,ID!' });
 		}
 	});
 });

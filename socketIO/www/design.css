@@ -1,13 +1,15 @@
+/*
+	Design by LoBo 2021
+*/
 html
 {
-        background: url(bg.png) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        font-family:monospace;
+	background: url(bg.png) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family:monospace;
 }
-
 body
 {
 	margin:0;
