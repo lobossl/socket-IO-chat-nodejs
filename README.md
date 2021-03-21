@@ -1,8 +1,8 @@
 # RUSTEN Chat Service
-nodejs socket.io express chat with rooms
+- nodejs socket.io express chat with rooms
 
 # INSTALL
-npm i express \n
-npm i socket.io
+- npm i express socket.io
 
-Author: LoBo
+# Author
+LoBo
