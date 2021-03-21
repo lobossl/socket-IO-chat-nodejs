@@ -50,12 +50,12 @@ io.on("connection",(s) =>
 			}
 			else
 			{
-				io.to(trimRoom).emit("message",{ raw: 'error', msg: 'input error, please try again.' });
+				s.emit("message",{ raw: 'error', msg: 'ERROR: check room length..' });
 			}
 		}
 		else
 		{
-			io.to(trimRoom).emit("message",{ raw: 'error', msg: 'NO MSG,ROOM,ID!' });
+			s.emit("message",{ raw: 'error', msg: 'ERROR: missing input..' });
 		}
 	});
 });
