@@ -2,7 +2,7 @@
 nodejs socket.io express chat with rooms
 
 # INSTALL
-npm i express
+npm i express \n
 npm i socket.io
 
 Author: LoBo
